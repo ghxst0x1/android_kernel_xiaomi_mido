@@ -1165,6 +1165,7 @@ check_bss:
 		roam_info.resp_ie_len = pmlmepriv->assoc_rsp_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 6;
 
 		cfg80211_roamed(padapter->pnetdev, &roam_info, GFP_ATOMIC);
+		/*
 		#else
 		cfg80211_roamed(padapter->pnetdev
 			#if LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 39) || defined(COMPAT_KERNEL_RELEASE)
@@ -1176,6 +1177,7 @@ check_bss:
 			, pmlmepriv->assoc_rsp + sizeof(struct rtw_ieee80211_hdr_3addr) + 6
 			, pmlmepriv->assoc_rsp_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 6
 			, GFP_ATOMIC);
+			*/
 		#endif /*LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)*/
 
 		RTW_INFO(FUNC_ADPT_FMT" call cfg80211_roamed\n", FUNC_ADPT_ARG(padapter));
@@ -1207,7 +1209,7 @@ check_bss:
                                 , pmlmepriv->assoc_req_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 2
                                 , pmlmepriv->assoc_rsp + sizeof(struct rtw_ieee80211_hdr_3addr) + 6
                                 , pmlmepriv->assoc_rsp_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 6
-                                , WLAN_STATUS_SUCCESS, GFP_ATOMIC);
+                                , WLAN_STATUS_SUCCESS, GFP_ATOMIC, NL80211_TIMEOUT_UNSPECIFIED);
 		#endif
                 }
 		#if LINUX_VERSION_CODE < KERNEL_VERSION(3, 11, 0) || defined(COMPAT_KERNEL_RELEASE)
